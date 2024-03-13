@@ -1,0 +1,8 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: entities
+  description: "All the entities in #B4mad Racing"
+spec:
+  targets:
+    - ./systems.yaml
