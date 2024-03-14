@@ -11,5 +11,5 @@ metadata:
       title: Pitwall
       icon: web
 spec:
-  owner: group:operate-first
+  owner: group:racing
   domain: sre

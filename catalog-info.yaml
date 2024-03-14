@@ -5,4 +5,4 @@ metadata:
   description: "All the entities in #B4mad Racing"
 spec:
   targets:
-    - ./systems.yaml
+    - ./catalog/systems.yaml
