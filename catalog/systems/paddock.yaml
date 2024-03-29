@@ -1,0 +1,14 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: paddock
+  title: Paddock
+  description: A django application providing the website and copilots
+  annotations:
+    backstage.io/techdocs-ref: url:https://github.com/b4mad/racing/tree/main/components/paddock
+  links:
+    - url: https://b4mad.racing/
+      title: Paddock
+      icon: web
+spec:
+  owner: group:racing

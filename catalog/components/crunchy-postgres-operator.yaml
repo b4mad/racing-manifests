@@ -1,0 +1,20 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: crunchy-postgres-operator
+  title: Crunchy PostgreSQL operator
+  description: PostgreSQL Crunchy OpenShift operator responsible for deploying a postgres database
+  links:
+    - url: https://www.crunchydata.com/products/crunchy-high-availability-postgresql
+      title: Crunchy product pages
+      icon: web
+    - url: https://access.crunchydata.com/documentation/postgres-operator/v5/
+      title: Documentation
+      icon: web
+spec:
+  type: operator
+  lifecycle: production
+  owner: group:racing
+  system: paddock
+  dependsOn:
+    - resource:phobos

@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: components
+  description: "A collection of all #B4mad Racing components"
+spec:
+  targets:
+    - ./components/crunchy-postgres-operator.yaml
+    - ./components/pg-cluster.yaml

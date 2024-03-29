@@ -6,3 +6,4 @@ metadata:
 spec:
   targets:
     - ./systems/pitwall.yaml
+    - ./systems/paddock.yaml

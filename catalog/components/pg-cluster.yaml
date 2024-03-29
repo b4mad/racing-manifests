@@ -1,0 +1,25 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: pg-cluster
+  title: PostgreSQL cluster
+  description: PostgreSQL is a powerful, open source object-relational database system. PostgreSQL cluster is created by Crunchy Postgres for Kubernetes operator
+  annotations:
+    backstage.io/kubernetes-label-selector: "postgres-operator.crunchydata.com/cluster=db"
+    backstage.io/kubernetes-namespace: b4mad-racing
+    github.com/project-slug: b4mad/racing
+  links:
+    - url: https://www.crunchydata.com/products/crunchy-high-availability-postgresql
+      title: Crunchy product pages
+      icon: web
+    - url: https://access.crunchydata.com/documentation/postgres-operator/v5/
+      title: Documentation
+      icon: web
+spec:
+  type: service
+  lifecycle: production
+  owner: group:racing
+  system: paddock
+  dependsOn:
+    - component:crunchy-postgres-operator
+    - resource:phobos
