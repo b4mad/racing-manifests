@@ -2,116 +2,57 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app.kubernetes.io/component: paddock
-  name: paddock
+    app.kubernetes.io/component: paddock-pitcrew
+  name: paddock-pitcrew
   annotations:
-    image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"paddock:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"paddock\")].image"},{"from":{"kind":"ImageStreamTag","name":"paddock:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"pitcrew\")].image"},{"from":{"kind":"ImageStreamTag","name":"paddock:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"migrate\")].image"}]'
+    image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"paddock:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"pitcrew\")].image"},{"from":{"kind":"ImageStreamTag","name":"paddock:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"migrate\")].image"}]'
 spec:
   replicas: 1
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app.kubernetes.io/component: paddock
+      app.kubernetes.io/component: paddock-pitcrew
   template:
     metadata:
       annotations:
         alpha.image.policy.openshift.io/resolve-names: '*'
       labels:
-        app.kubernetes.io/component: paddock
-      name: paddock
+        app.kubernetes.io/component: paddock-pitcrew
+      name: paddock-pitcrew
     spec:
       containers:
-        - env:
-            - name: DB_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: postgresql-app
-                  key: host
-            - name: DB_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: postgresql-app
-                  key: port
-            - name: DB_USER
-              valueFrom:
-                secretKeyRef:
-                  name: postgresql-app
-                  key: user
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgresql-app
-                  key: password
-            - name: DB_NAME
-              valueFrom:
-                secretKeyRef:
-                  name: postgresql-app
-                  key: dbname
-            - name: PADDOCK_POD_IP
-              valueFrom:
-                fieldRef:
-                  apiVersion: v1
-                  fieldPath: status.podIP
-          envFrom:
-            - secretRef:
-                name: paddock-settings
-            - secretRef:
-                name: paddock-socialaccounts
-          image: paddock:latest
-          imagePullPolicy: Always
-          name: paddock
-          command: ["/bin/sh", "-c"]
-          args:
-            - python /opt/app-root/src/manage.py collectstatic -i "*.py" -i "*.pyc" --noinput --link;
-              uwsgi --http "0.0.0.0:8000" --module paddock.wsgi:application --master --processes 4 --threads 2 --static-map /static=/opt/app-root/src/static
-          ports:
-            - containerPort: 8000
-              name: django-http
-              protocol: TCP
-          resources:
-            limits:
-              cpu: "1"
-              memory: 1Gi
-            requests:
-              cpu: 0
-              memory: 0
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
-          volumeMounts:
-            - name: django-metrics-dir
-              mountPath: /tmp/django-metrics
-        - env:
-            - name: DB_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: postgresql-app
-                  key: host
-            - name: DB_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: postgresql-app
-                  key: port
-            - name: DB_USER
-              valueFrom:
-                secretKeyRef:
-                  name: postgresql-app
-                  key: user
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgresql-app
-                  key: password
-            - name: DB_NAME
-              valueFrom:
-                secretKeyRef:
-                  name: postgresql-app
-                  key: dbname
-          envFrom:
-            - secretRef:
-                name: paddock-settings
-          image: paddock:latest
+        - image: paddock:latest
           imagePullPolicy: Always
           name: pitcrew
+          env:
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-app
+                  key: host
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-app
+                  key: port
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-app
+                  key: user
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-app
+                  key: password
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-app
+                  key: dbname
+          envFrom:
+            - secretRef:
+                name: paddock-settings
           command: ["/bin/sh", "-c"]
           args:
             - python /opt/app-root/src/manage.py pitcrew

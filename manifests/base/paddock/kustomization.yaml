@@ -6,7 +6,8 @@ commonLabels:
 
 resources:
   # - deployment_config.yaml
-  - deployment.yaml
+  - deployment_website.yaml
+  - deployment_pitcrew.yaml
   - image_stream.yaml
   - monitoring_alerting.yaml
   - service_account.yaml
