@@ -1,0 +1,29 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: mosquitto
+spec:
+  endpoints:
+    - interval: 15s
+      port: metrics
+      scheme: http
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: mosquitto
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: mosquitto
+spec:
+  groups:
+    - name: service
+      rules:
+        - alert: MosquittoMetricsDown
+          annotations:
+            description: "Mosquitto {{ $labels.namespace }}/{{ $labels.pod }} is down."
+            summary: mosquitto is down
+          expr: 'up{job="mosquitto-metrics",endpoint="metrics"} < 1'
+          labels:
+            severity: critical

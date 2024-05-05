@@ -1,0 +1,10 @@
+kind: Secret
+apiVersion: v1
+metadata:
+    name: influxdb2-backup
+stringData:
+    accessKeyID: Lb...Jk
+    secretAccessKey: mb..V2
+    bucketName: "https://127.0.0.1:9000/b4mad-racing-test-influx"
+    region: us-east-1
+type: Opaque

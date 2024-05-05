@@ -1,0 +1,45 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mosquitto-mqtt
+spec:
+  externalTrafficPolicy: Cluster
+  type: NodePort
+  selector:
+    app: mosquitto
+  ports:
+    - name: mqtt
+      nodePort: 31880
+      port: 1883
+      protocol: TCP
+      targetPort: 1883
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mosquitto-mqtt-tls
+spec:
+  externalTrafficPolicy: Cluster
+  type: NodePort
+  selector:
+    app: mosquitto
+  ports:
+    - name: mqtt
+      nodePort: 30880
+      port: 8883
+      protocol: TCP
+      targetPort: 8883
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mosquitto-metrics
+spec:
+  selector:
+    app.kubernetes.io/component: mosquitto
+  ports:
+    - name: metrics
+      port: 9234
+      protocol: TCP
+      targetPort: 9234

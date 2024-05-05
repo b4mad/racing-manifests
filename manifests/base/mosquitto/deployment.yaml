@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mosquitto
+  annotations:
+    original-image-tag.thoth-station.ninja: 2.0.15-openssl
+  labels:
+    app.kubernetes.io/version: "2.0.15-openssl"
+    app: mosquitto
+spec:
+  replicas: 1
+  revisionHistoryLimit: 4
+  selector:
+    matchLabels:
+      app: mosquitto
+  template:
+    metadata:
+      labels:
+        app: mosquitto
+    spec:
+      containers:
+        - name: mosquitto
+          image: docker.io/eclipse-mosquitto@sha256:4ee2d823259ed813fc3761ac63dcf5a940231017bfb6aa4fa74615f63f1a477f
+          # Warning: would violate PodSecurity "restricted:v1.24": allowPrivilegeEscalation != false (container "mosquitto" must set securityContext.allowPrivilegeEscalation=false), unrestricted capabilities (container "mosquitto" must set securityContext.capabilities.drop=["ALL"]), runAsNonRoot != true (pod or container "mosquitto" must set securityContext.runAsNonRoot=true), seccompProfile (pod or container "mosquitto" must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              drop:
+                - ALL
+          ports:
+            - name: mqtt
+              containerPort: 1883
+              protocol: TCP
+            - name: mqtt-tls
+              containerPort: 8883
+              protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: mqtt
+          readinessProbe:
+            tcpSocket:
+              port: mqtt
+          resources:
+            limits:
+              memory: 32Mi
+              cpu: 100m
+          volumeMounts:
+            - mountPath: /mosquitto/config
+              name: config
+            - mountPath: /mosquitto/password
+              name: password
+            - mountPath: /mosquitto/tls.crt
+              name: tls
+              subPath: tls.crt
+            - mountPath: /mosquitto/tls.key
+              name: tls
+              subPath: tls.key
+        - name: mosquitto-exporter
+          image: quay.io/b4mad/mosquitto-exporter@sha256:abe94175914684b88ca9ec9c256b4fa8a067e5bd3cec4cf9ded31586b386d1b2
+          resources:
+            limits:
+              memory: 32Mi
+              cpu: 100m
+          ports:
+            - name: metrics
+              containerPort: 9234
+              protocol: TCP
+          envFrom:
+            - prefix: MQTT_
+              secretRef:
+                name: mosquitto-exporter
+      volumes:
+        - configMap:
+            defaultMode: 420
+            name: mosquitto-config
+          name: config
+        - secret:
+            defaultMode: 420
+            secretName: mosquitto-password
+          name: password
+        - secret:
+            defaultMode: 420
+            secretName: https-cert-telemetry.test.b4mad.racing
+          name: tls
+      serviceAccount: mosquitto
+      serviceAccountName: mosquitto

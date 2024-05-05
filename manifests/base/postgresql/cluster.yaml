@@ -1,0 +1,90 @@
+apiVersion: postgres-operator.crunchydata.com/v1beta1
+kind: PostgresCluster
+metadata:
+  name: db
+spec:
+  # image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres:ubi8-14.10-0
+  openshift: true
+  postgresVersion: 14
+  service:
+    type: NodePort
+    nodePort: 31184
+  instances:
+    - name: instance
+      dataVolumeClaimSpec:
+        accessModes:
+          - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: 2Gi
+      # resources:
+      #   limits:
+      #     cpu: 2000m
+      #     memory: 2Gi
+  backups:
+    pgbackrest:
+      # image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.47-2
+      global:
+        repo1-retention-full: "7"
+        repo1-retention-full-type: count
+        # repo1-type: posix
+        log-level-console: debug
+      # repoHost:
+      #   resources:
+      #     limits:
+      #       cpu: 300m
+      #     requests:
+      #       cpu: 200m
+      repos:
+        - name: repo1
+          schedules:
+            # Every sunday at 01:00 full backup
+            # full: "0 1 * * 0"
+            # Monday through saturday at 01:00 differential backup
+            full: "0 1 * * 0"
+            # differential: "0 1 * * 1-6"
+          volume:
+            volumeClaimSpec:
+              accessModes:
+                - "ReadWriteOnce"
+              resources:
+                requests:
+                  storage: 60Gi
+        # - name: repo1
+        #   schedules:
+        #     full: "0 1 * * 0"
+        #     differential: "0 1 * * 1-6"
+        #   s3:
+        #     bucket: "b4mad-racing-dev-psql"
+        #     endpoint: "https://192.169.178.22:9000/"
+        #     region: "not-really-used"
+      configuration:
+      - secret:
+          name: pgo-s3-creds
+      manual:
+        repoName: repo1
+        options:
+         - --type=full
+  #   pgBouncer:
+  #     image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbouncer:ubi8-1.17-1
+  #     replicas: 1
+  users:
+    # - name: free-practice
+    #   databases:
+    #     - fp1
+    #     - fp2
+    #   options: "NOSUPERUSER"
+    # - name: telegraf
+    #   databases:
+    #     - stats
+    #   options: "NOSUPERUSER"
+    - name: paddock
+      databases:
+        - paddock
+        - stats
+      options: "NOSUPERUSER"
+    - name: paddock-root
+      databases:
+        - paddock
+        - stats
+      options: "SUPERUSER"

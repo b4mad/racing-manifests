@@ -1,0 +1,73 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: analyze
+  # image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"paddock:latest"},"fieldPath":"spec.jobTemplate.spec.template.spec.containers[?(@.name==\"analyze\")].image"}]'
+spec:
+  # run the analyze job an hour after the psql backup job
+  schedule: "0 3 * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 2
+  jobTemplate:
+    spec:
+      # only retry once - usually there's some telemetry problem
+      backoffLimit: 0
+      template:
+        metadata:
+          annotations:
+            alpha.image.policy.openshift.io/resolve-names: '*'
+          name: analyze
+        spec:
+          containers:
+            - env:
+                - name: DB_HOST
+                  valueFrom:
+                    secretKeyRef:
+                      name: postgresql-app
+                      key: host
+                - name: DB_PORT
+                  valueFrom:
+                    secretKeyRef:
+                      name: postgresql-app
+                      key: port
+                - name: DB_USER
+                  valueFrom:
+                    secretKeyRef:
+                      name: postgresql-app
+                      key: user
+                - name: DB_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: postgresql-app
+                      key: password
+                - name: DB_NAME
+                  valueFrom:
+                    secretKeyRef:
+                      name: postgresql-app
+                      key: dbname
+              securityContext:
+                runAsNonRoot: true
+                allowPrivilegeEscalation: false
+                seccompProfile:
+                  type: RuntimeDefault
+                capabilities:
+                  drop:
+                    - ALL
+              envFrom:
+                - secretRef:
+                    name: paddock-settings
+              image: paddock:latest
+              imagePullPolicy: Always
+              name: analyze
+              command: ["/bin/sh", "-c"]
+              args:
+                - python /opt/app-root/src/manage.py analyze --copy-influx
+              resources:
+                limits:
+                  cpu: "2"
+                  memory: 4Gi
+                requests:
+                  cpu: "0"
+                  memory: "0"
+          restartPolicy: Never

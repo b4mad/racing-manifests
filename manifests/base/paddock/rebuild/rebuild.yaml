@@ -1,0 +1,42 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: rebuild
+spec:
+  selector: {}
+  template:
+    metadata:
+      name: rebuild
+    spec:
+      containers:
+        - name: rebuild
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              drop:
+                - ALL
+          envFrom:
+            - secretRef:
+                name: paddock-settings
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-app
+                  key: uri
+          image: paddock:latest
+          imagePullPolicy: Always
+          command: ["/bin/sh", "-c"]
+          args:
+            - python /opt/app-root/src/manage.py replay --firehose --live --keep-session-id --end 'now()' --start=-7d --wait=0 --quiet --delta=1h --bucket=racing
+          resources:
+            limits:
+              cpu: "2"
+              memory: 2Gi
+            requests:
+              cpu: 0
+              memory: 0
+      restartPolicy: Never

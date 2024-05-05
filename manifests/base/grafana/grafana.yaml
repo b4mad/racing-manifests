@@ -1,0 +1,48 @@
+apiVersion: integreatly.org/v1alpha1
+kind: Grafana
+metadata:
+  name: grafana
+spec:
+  baseImage: quay.io/operate-first/grafana:9.1.1
+  configMaps:
+    - grafana-dashboards
+  config:
+    security:
+      allow_embedding: true
+    auth:
+      disable_login_form: false
+    auth.anonymous:
+      enabled: true
+      org_name: Main Org.
+      org_role: Viewer
+    users:
+      allow_sign_up: true
+    log:
+      level: warn
+      mode: console
+      default_home_dashboard_path: "/etc/grafana-configmaps/grafana-dashboards/landingpage.json"
+  dashboardLabelSelector:
+    - matchLabels:
+        app: grafana
+  ingress:
+    enabled: false
+  dataStorage:
+    accessModes:
+      - ReadWriteOnce
+    size: "1Gi"
+    class: ocs-external-storagecluster-ceph-rbd
+  deployment:
+    skipCreateAdminAccount: true
+    # otherwise it's rolling update, which doesnt work with RWO storage, cant be attached multiple times
+    strategy:
+      type: Recreate
+    envFrom:
+      - secretRef:
+          name: grafana-credentials
+    env:
+      - name: INFLUX_GRAFANA_READER_TOKEN
+        valueFrom:
+          secretKeyRef:
+            # create this via the influx UI as a reader token for the racing bucket
+            name: grafana-credentials
+            key: INFLUX_GRAFANA_READER_TOKEN

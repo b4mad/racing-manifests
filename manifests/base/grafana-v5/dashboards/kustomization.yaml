@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - details-crew-chief.yaml
+  - details-extended.yaml
+  # - details-simhub.yaml
+  - driver-extended.yaml
+  - driver.yaml
+  - landingpage.yaml
+  - landingpage-extended.yaml
+  - track-standings.yaml

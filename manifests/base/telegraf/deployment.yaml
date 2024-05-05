@@ -1,0 +1,63 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: telegraf
+  labels:
+    app.kubernetes.io/component: telegraf
+spec:
+  replicas: 1
+  revisionHistoryLimit: 4
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: telegraf
+  template:
+    spec:
+      containers:
+        - env:
+            - name: HOSTNAME
+              value: telegraf
+            - name: USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mosquitto-password
+                  key: crewchief-username
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mosquitto-password
+                  key: crewchief-password
+            - name: INFLUX_TOKEN
+              # create this via the influx UI as a writer token for the racing bucket
+              valueFrom:
+                secretKeyRef:
+                  name: influxdb2-auth
+                  key: write-user-password
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              drop:
+                - ALL
+          image: telegraf:1.22.3
+          name: telegraf
+          ports:
+            - name: metrics
+              containerPort: 9090
+          volumeMounts:
+            - mountPath: /etc/telegraf
+              name: config
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: 200m
+      restartPolicy: Always
+      serviceAccount: telegraf
+      serviceAccountName: telegraf
+      volumes:
+        - configMap:
+            defaultMode: 420
+            name: telegraf-config
+          name: config

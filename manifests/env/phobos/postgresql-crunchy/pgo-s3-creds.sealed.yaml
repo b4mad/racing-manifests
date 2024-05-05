@@ -1,0 +1,19 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: pgo-s3-creds
+  namespace: b4mad-racing
+spec:
+  encryptedData:
+    s3.conf: AgAKc+aabpi92Wu7Vsc2gwdVnmBivj2fiC2TiGiomMULffGypfjPGV3t6y4o5OWQmH6Txt7FPUoSGDrtUpZQiO9yAYel8siiWWbykZMU3ibtPSUs5WNzWpXZJgUMLvUX5qXXVJwSC54sh02EadGW+fkL3CBpEzAl4LBUCpqQJDn7VNexd1iDL7Kjy53TQ/DM7EBLHTHcvRPvqSjC/RetW2l7Tw2/ka+OXtT7EMiqt+P/pIJNf6Eu4HmF4v2N+RxAC44IPOzpxzvJnstIO2C+o+Zix8REACo4M/4IPE2O01iFEhvZJgCk0NMTwltJ4fw/qTxjgBr3KNnMNT12B4yoDdsJzWkWfOvsDC/WyyqyLHFvLKI/FxZDBczieUbB2+Frt6hiXoEX20/Eal/Xdhe11uGq1fNNRjiWcxfCkXYEeagZ5Hcnp/G0RwzXTMcWEyGZZDqnq23+mGZVQDX8NUxcBHogITm7xlU1YST9/Wxv96flsgwzwu6RclWjCpTLLP7YKlizNLwzagfokCCiVqmgfFstFPGG98Cqb/KgPRE1+/BmnB/oyO0FJ9ObehWpEhnMX3L/NPROOLBQirynOaAV6uB0HGnNbeq6Tj8H11wlFe4BDBxhgwpT5psHGkJgQuu4mDEXIqsaTwLEpBDkJEJFo8R/YfU0nvxrbrD7YtbEib5SRyZf0rJpX3VyyT0gVNq31+favKAneyBzEhCT8HZIPr/dEJV8cDK9Hg4vXVTc7rKVNmXid4NqXqDPUuJOO1ZswXkR1aeZMtz4YR8z4SiJN87CrWB6d+5BlBLuJOFaoCV9+IDxR96OadEdkBv1vUjaPIRUA4JrZGqL5Dr9fuqYi8W/Lkw15p5AYBi4ummLzJj4FvMA/RJKlsrZuaDtnKypb/BI3X3bJ8nZ0QNJk+wP2+Y+GE4EfdxJW1Z23jbOy/rKXTk=
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/managed-by: humans
+        app.kubernetes.io/name: b4mad-racing
+        app.kubernetes.io/version: v0.1.0-dev
+      name: pgo-s3-creds
+      namespace: b4mad-racing
+    type: Opaque

@@ -1,0 +1,19 @@
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: details-crew-chief
+spec:
+  instanceSelector:
+    matchLabels:
+      dashboards: "grafana"
+  folder: CrewChief
+  datasources:
+    - inputName: "DS_RACING"
+      datasourceName: "Racing"
+  resyncPeriod: 1h
+  # Error: ✗ failed to create temporary file: open /tmp/919128373.zip: read-only file system
+  # https://github.com/prometheus-operator/kube-prometheus/pull/1624/files
+  plugins:
+    - name: "michaeldmoore-scatter-panel"
+      version: "1.2.0"
+  url: "https://raw.githubusercontent.com/b4mad/racing/main/manifests/base/grafana-v5/dashboards/details-crew-chief.json"
