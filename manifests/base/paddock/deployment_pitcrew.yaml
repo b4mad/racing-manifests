@@ -1,3 +1,26 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: pitcrew-deployments
+rules:
+  - apiGroups: ["apps", "extensions"]
+    resources: ["deployments"]
+    resourceNames: ["paddock"]
+    verbs: ["*"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: pitcrew-deployments
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: pitcrew-deployments
+subjects:
+  - kind: ServiceAccount
+    name: paddock
+    namespace: b4mad-racing
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
