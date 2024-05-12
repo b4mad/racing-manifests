@@ -6,7 +6,7 @@ spec:
   tags:
   - from:
       kind: DockerImage
-      name: ghcr.io/b4mad/paddock:latest
+      name: ghcr.io/b4mad/racing-paddock:latest
     importPolicy:
       scheduled: true
     name: latest
