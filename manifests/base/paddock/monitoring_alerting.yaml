@@ -10,7 +10,7 @@ spec:
       scheme: http
   selector:
     matchLabels:
-      app.kubernetes.io/component: paddock
+      app.kubernetes.io/component: paddock-website
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
