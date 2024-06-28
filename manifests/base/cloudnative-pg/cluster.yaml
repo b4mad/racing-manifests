@@ -15,6 +15,12 @@ spec:
         - CREATE EXTENSION postgis_topology;
         - CREATE EXTENSION fuzzystrmatch;
         - CREATE EXTENSION postgis_tiger_geocoder;
+        - CREATE USER reader WITH PASSWORD 'paddock';
+        - GRANT CONNECT ON DATABASE paddock TO reader;
+        - GRANT USAGE ON SCHEMA public TO reader;
+        - GRANT SELECT ON telemetry_game TO reader;
+        - GRANT SELECT ON telemetry_car TO reader;
+  enableSuperuserAccess: True
   postgresql:
     shared_preload_libraries:
       - timescaledb

@@ -16,11 +16,21 @@ spec:
     spec:
       containers:
       - name: postgraphile
-        image: graphile/postgraphile:latest
+        image: graphile/postgraphile:next
         ports:
         - containerPort: 5000
         env:
-        - name: DATABASE_URL
-          value: "postgres://user:password@hostname:5432/dbname"
-        - name: SCHEMA
-          value: "public"
+          - name: DATABASE_URL
+            value: "postgresql://reader:paddock@postgresql-r:5432/paddock"
+          - name: SCHEMA
+            value: "public"
+        args:
+        - --no-ignore-rbac
+        - --enhance-graphiql
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+          requests:
+            cpu: "100m"
+            memory: "256Mi"

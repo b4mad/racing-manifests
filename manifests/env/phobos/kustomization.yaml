@@ -15,6 +15,7 @@ resources:
   - mosquitto/
   - paddock/
   - postgresql/
+  - postgraphile/
   - telegraf/
 
   - secrets/paddock-settings.sealed.yaml

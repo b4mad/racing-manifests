@@ -18,3 +18,4 @@ secrets/**decrypted**
 venv/
 tmp.d/
 k6
+.aider*

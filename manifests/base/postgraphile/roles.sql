@@ -1,0 +1,13 @@
+GRANT SELECT ON TABLE public.telemetry_car TO reader;
+GRANT SELECT ON TABLE public.telemetry_carclass TO reader;
+GRANT SELECT ON TABLE public.telemetry_driver TO reader;
+GRANT SELECT ON TABLE public.telemetry_fastlap TO reader;
+GRANT SELECT ON TABLE public.telemetry_fastlapsegment TO reader;
+GRANT SELECT ON TABLE public.telemetry_game TO reader;
+GRANT SELECT ON TABLE public.telemetry_landmark TO reader;
+GRANT SELECT ON TABLE public.telemetry_lap TO reader;
+GRANT SELECT ON TABLE public.telemetry_session TO reader;
+GRANT SELECT ON TABLE public.telemetry_sessiontype TO reader;
+GRANT SELECT ON TABLE public.telemetry_track TO reader;
+GRANT SELECT ON TABLE public.telemetry_trackguide TO reader;
+GRANT SELECT ON TABLE public.telemetry_trackguidenote TO reader;
