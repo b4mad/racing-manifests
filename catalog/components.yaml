@@ -6,4 +6,5 @@ metadata:
 spec:
   targets:
     - ./components/crunchy-postgres-operator.yaml
+    - ./components/paddock.yaml
     - ./components/pg-cluster.yaml
