@@ -16,4 +16,5 @@ stringData:
   B4MAD_RACING_INFLUX_ORG: b4mad
   B4MAD_RACING_INFLUX_TOKEN: some-influx-token
   B4MAD_RACING_INFLUX_URL: http://influxdb2:8086/
+  ELEVENLABS_API_KEY: ""
 type: Opaque

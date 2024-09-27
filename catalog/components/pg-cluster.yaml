@@ -7,7 +7,7 @@ metadata:
   annotations:
     backstage.io/kubernetes-label-selector: "postgres-operator.crunchydata.com/cluster=db"
     backstage.io/kubernetes-namespace: b4mad-racing
-    backstage.io/kubernetes-id: phobos
+    backstage.io/kubernetes-id: b4mad-racing
     github.com/project-slug: b4mad/racing
   links:
     - url: https://www.crunchydata.com/products/crunchy-high-availability-postgresql

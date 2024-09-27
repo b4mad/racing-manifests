@@ -4,6 +4,8 @@ kind: Kustomization
 labels:
   - pairs:
       app.kubernetes.io/name: b4mad-racing
+commonLabels:
+  backstage.io/kubernetes-id: b4mad-racing
 
 namespace: b4mad-racing
 

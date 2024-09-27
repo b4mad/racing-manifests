@@ -63,7 +63,7 @@ spec:
           command: ["/bin/sh", "-c"]
           args:
             - python /opt/app-root/src/manage.py collectstatic -i "*.py" -i "*.pyc" --noinput --link;
-              uwsgi --http "0.0.0.0:8000" --module paddock.wsgi:application --master --processes 4 --threads 2 --static-map /static=/opt/app-root/src/static
+              uwsgi --http "0.0.0.0:8000" --module paddock.wsgi:application --master --processes 4 --threads 2 --static-map /static=/opt/app-root/src/static --static-map /media=/opt/app-root/src/media
           ports:
             - containerPort: 8000
               name: django-http
@@ -80,6 +80,8 @@ spec:
           volumeMounts:
             - name: django-metrics-dir
               mountPath: /tmp/django-metrics
+            - name: media-storage
+              mountPath: /opt/app-root/src/media
       serviceAccount: paddock
       serviceAccountName: paddock
       initContainers:
@@ -131,3 +133,6 @@ spec:
           emptyDir:
             medium: Memory
             sizeLimit: 256Mi
+        - name: media-storage
+          persistentVolumeClaim:
+            claimName: paddock-media-pvc

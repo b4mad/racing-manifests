@@ -6,9 +6,9 @@ metadata:
   description: A django application providing the website and copilots
   annotations:
     backstage.io/techdocs-ref: url:https://github.com/b4mad/racing/tree/main/components/paddock
-    backstage.io/kubernetes-id: phobos
-    github.com/project-slug: b4mad/racing
+    backstage.io/kubernetes-id: b4mad-racing
     backstage.io/kubernetes-namespace: b4mad-racing
+    github.com/project-slug: b4mad/racing
   links:
     - url: https://b4mad.racing/
       title: Paddock
