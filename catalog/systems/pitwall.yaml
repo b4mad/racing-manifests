@@ -4,8 +4,6 @@ metadata:
   name: pitwall
   title: Pitwall
   description: The Pitwall visualizes all incoming telemetry in real time - based on Grafana
-  annotations:
-    backstage.io/techdocs-ref: url:https://github.com/b4mad/racing/tree/main
   links:
     - url: https://pitwall.b4mad.racing/
       title: Pitwall

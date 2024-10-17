@@ -1,0 +1,21 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: pitwall-grafana
+  title: Grafana
+  description: A Grafana instance to show telemetry collected by the paddock
+  annotations:
+    operate-first.cloud/logo-url: https://raw.githubusercontent.com/grafana/grafana/main/public/img/grafana_icon.svg
+    github.com/project-slug: b4mad/racing-manifests
+    backstage.io/kubernetes-label-selector: "app=grafana"
+    backstage.io/kubernetes-namespace: b4mad-racing
+spec:
+  type: service
+  lifecycle: production
+  owner: group:racing
+  system: pitwall
+  dependsOn:
+    - resource:phobos
+    - component:grafana-operator
+  providesApis:
+    - grafana
