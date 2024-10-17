@@ -36,6 +36,9 @@ spec:
           storage: "1Gi"
   deployment:
     spec:
+      metadata:
+        labels:
+          app.kubernetes.io/name: b4mad-racing-grafana
       template:
         spec:
           containers:

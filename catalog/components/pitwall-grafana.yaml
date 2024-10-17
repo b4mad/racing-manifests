@@ -7,7 +7,7 @@ metadata:
   annotations:
     operate-first.cloud/logo-url: https://raw.githubusercontent.com/grafana/grafana/main/public/img/grafana_icon.svg
     github.com/project-slug: b4mad/racing-manifests
-    backstage.io/kubernetes-label-selector: "app=grafana"
+    backstage.io/kubernetes-label-selector: "app.kubernetes.io/name=b4mad-racing-grafana"
     backstage.io/kubernetes-namespace: b4mad-racing
 spec:
   type: service

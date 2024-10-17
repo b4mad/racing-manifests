@@ -4,7 +4,7 @@ kind: Kustomization
 labels:
   - pairs:
       app.kubernetes.io/managed-by: humans
-      app.kubernetes.io/name: b4mad-racing
+      app.kubernetes.io/name: b4mad-racing-grafana
       app.kubernetes.io/version: v0.1.0-dev
 
 resources:
