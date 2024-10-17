@@ -40,6 +40,9 @@ spec:
         app.kubernetes.io/name: b4mad-racing-grafana
     spec:
       template:
+        metadata:
+          labels:
+            app.kubernetes.io/name: b4mad-racing-grafana
         spec:
           containers:
             - name: grafana
