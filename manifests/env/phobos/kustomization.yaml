@@ -18,6 +18,7 @@ resources:
   - postgresql/
   - postgraphile/
   - telegraf/
+  - databox/
 
   - secrets/paddock-settings.sealed.yaml
   - secrets/paddock-socialaccounts.yaml

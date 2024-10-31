@@ -3,6 +3,12 @@ kind: Ingress
 metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
+    # haproxy.router.openshift.io/cors-allow-origin: "https://databox.b4mad.racing"
+    # If you need to allow multiple origins, separate them with a space
+    # haproxy.router.openshift.io/cors-allow-origin: "https://databox.b4mad.racing https://other-domain.com"
+    # haproxy.router.openshift.io/disable-cookies: "true"  # Optional, if you don't need cookies
+    # haproxy.router.openshift.io/cors-allow-methods: "GET POST OPTIONS"  # Adjust methods as needed
+    # haproxy.router.openshift.io/cors-allow-headers: "Authorization,Content-Type"  # Adjust headers as needed
     haproxy.router.openshift.io/timeout: 15m
   name: influx
 spec:

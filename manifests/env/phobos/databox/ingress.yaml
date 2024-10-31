@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    haproxy.router.openshift.io/timeout: 120s
+  name: databox
+spec:
+  ingressClassName: openshift-default
+  rules:
+    - host: databox.b4mad.racing
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: databox
+                port:
+                  name: http
+  tls:
+    - hosts:
+        - databox.b4mad.racing
+      secretName: https-cert-databox.b4mad.racing
