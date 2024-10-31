@@ -5,7 +5,7 @@ metadata:
   description: "A collection of all #B4mad Racing components"
 spec:
   targets:
-    - ./components/crunchy-postgres-operator.yaml
+    - ./components/cloud-native-pg-operator.yaml
     - ./components/paddock.yaml
     - ./components/pg-cluster.yaml
     - ./components/pitwall-grafana.yaml

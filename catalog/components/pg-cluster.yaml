@@ -9,18 +9,11 @@ metadata:
     backstage.io/kubernetes-namespace: b4mad-racing
     backstage.io/kubernetes-id: b4mad-racing
     github.com/project-slug: b4mad/racing
-  links:
-    - url: https://www.crunchydata.com/products/crunchy-high-availability-postgresql
-      title: Crunchy product pages
-      icon: web
-    - url: https://access.crunchydata.com/documentation/postgres-operator/v5/
-      title: Documentation
-      icon: web
 spec:
   type: service
   lifecycle: production
   owner: group:racing
   system: paddock
   dependsOn:
-    - component:crunchy-postgres-operator
-    - resource:phobos
+    - component:cloud-native-pg-operator
+    - resource:cluster-phobos

@@ -1,0 +1,8 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: domains
+  description: "A collection of all #B4mad racing domains"
+spec:
+  targets:
+    - ./domains/ingestion.yaml

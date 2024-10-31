@@ -1,0 +1,8 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: resources
+  description: A collection of all racing resources
+spec:
+  targets:
+    - ./resources/cluster-phobos.yaml

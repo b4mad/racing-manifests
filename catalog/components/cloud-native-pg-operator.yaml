@@ -1,0 +1,20 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: cloud-native-pg-operator
+  title: CloudNativePG PostgreSQL operator
+  description: CloudNativePG OpenShift operator responsible for deploying a postgres database
+  links:
+    - url: https://cloudnative-pg.io/
+      title: CloudNativePG product pages
+      icon: web
+    - url: https://cloudnative-pg.io/docs/
+      title: Documentation
+      icon: web
+spec:
+  type: operator
+  lifecycle: production
+  owner: group:racing
+  system: paddock
+  dependsOn:
+    - resource:cluster-phobos
