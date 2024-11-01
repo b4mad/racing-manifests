@@ -6,4 +6,6 @@ metadata:
 spec:
   targets:
     - ./catalog/components.yaml
+    - ./catalog/domains.yaml
+    - ./catalog/resources.yaml
     - ./catalog/systems.yaml
