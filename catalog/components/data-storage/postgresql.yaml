@@ -1,0 +1,17 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: postgresql
+  description: PostgreSQL database for structured data storage
+  annotations:
+    backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=postgresql'
+  tags:
+    - postgresql
+    - database
+spec:
+  type: service
+  lifecycle: production
+  owner: group:racing
+  system: data-storage
+  providesApis:
+    - postgresql-api

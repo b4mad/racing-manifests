@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: visualization
+  description: Systems for visualizing and reporting telemetry data
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+  tags:
+    - dashboards
+    - reporting
+    - visualization
+spec:
+  owner: group:racing

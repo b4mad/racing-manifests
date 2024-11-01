@@ -1,0 +1,16 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: mosquitto
+  description: MQTT message broker for real-time telemetry data distribution
+  annotations:
+    backstage.io/kubernetes-id: mosquitto
+    backstage.io/kubernetes-namespace: b4mad-racing
+  tags:
+    - mqtt
+    - messaging
+spec:
+  type: service
+  lifecycle: production
+  owner: group:racing
+  system: message-broker

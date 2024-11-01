@@ -1,0 +1,22 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: grafana
+  description: Grafana visualization platform and dashboards
+  annotations:
+    backstage.io/kubernetes-id: grafana
+    github.com/project-slug: b4mad/racing-manifests
+    backstage.io/kubernetes-label-selector: "app.kubernetes.io/name=b4mad-racing-grafana"
+    backstage.io/kubernetes-namespace: b4mad-racing
+  tags:
+    - grafana
+    - visualization
+    - dashboards
+spec:
+  type: visualization-platform
+  lifecycle: production
+  owner: group:racing
+  system: grafana
+  dependsOn:
+    - component:influxdb
+    - component:postgresql

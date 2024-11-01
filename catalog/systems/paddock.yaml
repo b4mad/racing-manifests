@@ -2,13 +2,25 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: paddock
-  title: Paddock
-  description: A django application providing the website and copilots
+  description: Race data management and control system
   annotations:
     backstage.io/techdocs-ref: url:https://github.com/b4mad/racing/tree/main/components/paddock
+    github.com/project-slug: racing/paddock
   links:
     - url: https://b4mad.racing/
       title: Paddock
       icon: web
+  tags:
+    - django
+    - python
+    - web
 spec:
   owner: group:racing
+  domain: data-collection
+  type: service
+  subcomponents:
+    - component:paddock-website
+    - component:paddock-pitcrew
+  dependsOn:
+    - resource:postgresql
+    - system:data-storage

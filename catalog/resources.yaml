@@ -6,3 +6,4 @@ metadata:
 spec:
   targets:
     - ./resources/cluster-phobos.yaml
+    - ./resources/paddock-media-storage.yaml

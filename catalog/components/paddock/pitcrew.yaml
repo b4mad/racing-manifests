@@ -1,0 +1,19 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: paddock-pitcrew
+  description: Paddock background worker for race control operations
+  annotations:
+    backstage.io/kubernetes-id: paddock-pitcrew
+    backstage.io/kubernetes-namespace: b4mad-racing
+  tags:
+    - django
+    - worker
+spec:
+  type: service
+  lifecycle: production
+  owner: group:racing
+  system: paddock
+  dependsOn:
+    - resource:postgresql
+    - component:paddock-website

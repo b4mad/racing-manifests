@@ -1,0 +1,20 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: data-processing
+  description: System for querying and aggregating telemetry data
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+  tags:
+    - python
+    - analytics
+spec:
+  owner: group:racing
+  domain: data-analysis
+  type: analytics
+  subcomponents:
+    - component:telegraf
+    - component:postgraphile
+  dependsOn:
+    - resource:data-storage
+    - system:data-storage

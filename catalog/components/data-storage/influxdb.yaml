@@ -1,0 +1,17 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: influxdb
+  description: InfluxDB time-series database for telemetry storage
+  annotations:
+    backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=influxdb'
+  tags:
+    - influxdb
+    - database
+spec:
+  type: service
+  lifecycle: production
+  owner: group:racing
+  system: data-storage
+  providesApis:
+    - influxdb-api

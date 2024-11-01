@@ -1,0 +1,20 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: databox
+  description: React application for telemetry data visualization
+  annotations:
+    backstage.io/kubernetes-id: databox
+    backstage.io/kubernetes-namespace: b4mad-racing
+    github.com/project-slug: racing/databox
+  tags:
+    - react
+    - frontend
+    - visualization
+spec:
+  type: website
+  lifecycle: production
+  owner: group:racing
+  system: grafana
+  dependsOn:
+    - component:grafana

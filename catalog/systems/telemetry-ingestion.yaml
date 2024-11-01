@@ -1,0 +1,19 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: telemetry-ingestion
+  description: Handles data reception and initial processing from CrewChief
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: racing/telemetry-ingestion
+  tags:
+    - python
+    - crewchief
+spec:
+  owner: group:racing
+  domain: data-collection
+  type: data-pipeline
+  dependsOn:
+    - resource:message-broker
+    - system:message-broker
+    - system:paddock

@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: data-analysis
+  description: Systems for analyzing and processing telemetry data
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+  tags:
+    - analytics
+    - processing
+    - storage
+spec:
+  owner: group:racing

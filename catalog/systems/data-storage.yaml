@@ -1,0 +1,19 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: data-storage
+  description: Comprehensive data storage system using InfluxDB and PostgreSQL
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: racing/data-storage
+  tags:
+    - influxdb
+    - postgresql
+    - timeseries
+spec:
+  owner: group:racing
+  domain: data-analysis
+  type: database
+  subcomponents:
+    - component:influxdb
+    - component:postgresql

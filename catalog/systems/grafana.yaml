@@ -1,0 +1,22 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: grafana
+  title: Grafana
+  description: Grafana is a multi-platform open source analytics and interactive visualization web application.
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: racing/grafana-dashboards
+  tags:
+    - grafana
+    - dashboard
+spec:
+  owner: group:racing
+  domain: visualization
+  type: visualization-platform
+  subcomponents:
+    - component:grafana
+    - component:databox
+  dependsOn:
+    - resource:data-storage
+    - system:data-storage

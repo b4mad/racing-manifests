@@ -5,7 +5,16 @@ metadata:
   description: "A collection of all #B4mad Racing components"
 spec:
   targets:
-    - ./components/cloud-native-pg-operator.yaml
-    - ./components/paddock.yaml
-    - ./components/pg-cluster.yaml
-    - ./components/pitwall-grafana.yaml
+    # - ./components/cloud-native-pg-operator.yaml
+    # - ./components/paddock.yaml
+    # - ./components/pg-cluster.yaml
+    # - ./components/pitwall-grafana.yaml
+    - ./components/data-storage/influxdb.yaml
+    - ./components/data-storage/postgresql.yaml
+    - ./components/data-processing/telegraf.yaml
+    - ./components/data-processing/postgraphile.yaml
+    - ./components/paddock/website.yaml
+    - ./components/paddock/pitcrew.yaml
+    - ./components/message-broker/mosquitto.yaml
+    - ./components/visualization/grafana.yaml
+    - ./components/visualization/databox.yaml

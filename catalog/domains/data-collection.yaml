@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: data-collection
+  description: Systems for gathering telemetry data from simulation environments
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+  tags:
+    - telemetry
+    - ingestion
+    - realtime
+spec:
+  owner: group:racing

@@ -5,4 +5,6 @@ metadata:
   description: "A collection of all #B4mad racing domains"
 spec:
   targets:
-    - ./domains/ingestion.yaml
+    - ./domains/data-collection.yaml
+    - ./domains/data-analysis.yaml
+    - ./domains/visualization.yaml

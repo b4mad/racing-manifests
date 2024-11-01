@@ -5,5 +5,9 @@ metadata:
   description: "A collection of all #B4mad Racing systems"
 spec:
   targets:
-    - ./systems/pitwall.yaml
+    - ./systems/data-processing.yaml
+    - ./systems/data-storage.yaml
+    - ./systems/grafana.yaml
+    - ./systems/message-broker.yaml
+    - ./systems/telemetry-ingestion.yaml
     - ./systems/paddock.yaml

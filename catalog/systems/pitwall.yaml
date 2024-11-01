@@ -8,5 +8,35 @@ metadata:
     - url: https://pitwall.b4mad.racing/
       title: Pitwall
       icon: web
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: racing/pitwall
+  tags:
+    - react
+    - dashboard
 spec:
   owner: group:racing
+  domain: visualization
+  type: web-application
+  dependsOn:
+    - resource:data-processing
+    - resource:grafana
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: pitwall
+  description: B4mad Racing Pitwall telemetry visualization dashboard system
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: racing/pitwall
+  tags:
+    - dashboard
+    - visualization
+    - web
+spec:
+  owner: group:racing
+  domain: visualization
+  type: web-application
+  dependsOn:
+    - resource:data-storage
+    - system:grafana

@@ -1,0 +1,19 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: message-broker
+  description: MQTT system for telemetry data distribution
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: racing/message-broker
+  tags:
+    - mqtt
+    - messaging
+spec:
+  owner: group:racing
+  domain: data-collection
+  type: messaging
+  subcomponents:
+    - component:mosquitto
+  dependsOn:
+    - resource:data-storage

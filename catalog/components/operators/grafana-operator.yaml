@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: grafana-operator
+  title: Grafana operator
+  description: A Kubernetes Operator based on the Operator SDK for creating and managing Grafana instances
+spec:
+  type: operator
+  lifecycle: production
+  owner: group:racing
+  system: grafana
+  dependsOn:
+    - resource:cluster-phobos

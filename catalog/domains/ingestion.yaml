@@ -1,8 +1,0 @@
-apiVersion: backstage.io/v1alpha1
-kind: Domain
-metadata:
-  name: ingestion
-  title: "#B4mad racing"
-  description: Ingestion domain contains all necessary components to ingest telemetry data
-spec:
-  owner: group:racing
