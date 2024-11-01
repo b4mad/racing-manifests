@@ -4,8 +4,8 @@ metadata:
   name: paddock-pitcrew
   description: Paddock background worker for race control operations
   annotations:
-    backstage.io/kubernetes-id: paddock-pitcrew
     backstage.io/kubernetes-namespace: b4mad-racing
+    backstage.io/kubernetes-label-selector: 'app.kubernetes.io/component=paddock-pitcrew'
   tags:
     - django
     - worker

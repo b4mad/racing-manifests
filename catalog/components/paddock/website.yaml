@@ -6,6 +6,7 @@ metadata:
   annotations:
     backstage.io/kubernetes-id: paddock-website
     backstage.io/kubernetes-namespace: b4mad-racing
+    backstage.io/kubernetes-label-selector: 'app.kubernetes.io/component=paddock-website'
   tags:
     - django
     - web
