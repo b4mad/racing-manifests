@@ -29,8 +29,6 @@ spec:
         - --no-ignore-rbac
         - --enhance-graphiql
         - --dynamic-json
-        - --append-plugins
-        - '@graphile-contrib/pg-simplify-inflector'
         - --enable-query-batching
         resources:
           limits:
