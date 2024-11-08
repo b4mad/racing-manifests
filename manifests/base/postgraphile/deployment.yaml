@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: postgraphile
-        image: graphile/postgraphile:next
+        image: graphile/postgraphile:4
         ports:
         - containerPort: 5000
         env:
@@ -25,12 +25,16 @@ spec:
           - name: SCHEMA
             value: "public"
         args:
+        - --retry-on-init-fail
         - --no-ignore-rbac
         - --enhance-graphiql
+        - --dynamic-json
+        - --append-plugins @graphile-contrib/pg-simplify-inflector
+        - --enable-query-batching
         resources:
           limits:
             cpu: "1"
-            memory: "1Gi"
+            memory: "4Gi"
           requests:
             cpu: "100m"
             memory: "256Mi"
