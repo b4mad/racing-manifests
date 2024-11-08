@@ -1,21 +1,17 @@
 # Define access for durandom user
 user durandom
-topic readwrite coach/durandom/#
+topic readwrite /coach/durandom/#
 topic readwrite crewchief/durandom/#
 
 # Deny specific topics for crewchief user
 user crewchief
-topic deny coach/durandom/#
+topic deny /coach/durandom/#
 topic deny crewchief/durandom/#
-topic readwrite coach/#
+topic readwrite /coach/#
 topic readwrite crewchief/#
 
 # Allow other topics for admin
 user admin
 topic readwrite #
-
-# Deny these topics for all other users
-# topic deny coach/durandom/#
-# topic deny crewchief/durandom/#
 
 pattern read $SYS/#
