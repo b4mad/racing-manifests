@@ -22,7 +22,6 @@ resources:
 
   - secrets/paddock-settings.sealed.yaml
   - secrets/paddock-socialaccounts.yaml
-  - secrets/secret.sealed.yaml
 
 generatorOptions:
   disableNameSuffixHash: true

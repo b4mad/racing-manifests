@@ -11,6 +11,8 @@ metadata:
     # haproxy.router.openshift.io/cors-allow-methods: "GET POST OPTIONS"  # Adjust methods as needed
     # haproxy.router.openshift.io/cors-allow-headers: "Authorization,Content-Type"  # Adjust headers as needed
   name: b4mad-racing
+  labels:
+    app.kubernetes.io/component: paddock-website
 spec:
   ingressClassName: openshift-default
   rules:

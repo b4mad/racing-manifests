@@ -8,3 +8,10 @@ mosquitto_passwd -b mosquitto.passwd crewchief crewchief
 ```
 
 Then add the contents of `mosquitto.passwd` to the passwords field in secret/secret.yaml
+
+```
+sops --decrypt secret.enc.yaml \
+| kubeseal --controller-namespace=sealed-secrets \
+    --format yaml \
+> ../../env/phobos/mosquitto/mosquitto-password.yaml
+``

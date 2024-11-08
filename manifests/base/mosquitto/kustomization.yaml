@@ -18,3 +18,4 @@ configMapGenerator:
     files:
       - dynamic-security.json
       - mosquitto.conf
+      - acl
